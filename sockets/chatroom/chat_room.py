@@ -16,7 +16,7 @@ def client_thread(conn, addr):
         try:
             message = conn.recv(2048).decode()
             if message:
-                message_to_send = "<" + addr[0] + ">" + message 
+                message_to_send = "<" + addr[1] + ">" + message 
                 print(message_to_send)
                 broadcast(message_to_send.encode(), conn)
             else: 
@@ -41,5 +41,5 @@ print(f' Na porta {port}')
 while True:
     conn , address = server.accept()
     list_of_clients.append(conn)
-    print(address[0] , " Connected")
+    print(address , " Connected")
     start_new_thread(client_thread,(conn,address))
